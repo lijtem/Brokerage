@@ -20,6 +20,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { AppRoutingModule } from './app-routing.module';
+import { FullComponent } from './layouts/full/full.component';
 
 @NgModule({
   declarations: [
@@ -29,18 +31,14 @@ import { MatMenuModule } from '@angular/material/menu';
     CounterComponent,
     FetchDataComponent,
     DashboardComponent,
+    FullComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-    ]),
+    AppRoutingModule,
     BrowserAnimationsModule,    
     NoopAnimationsModule,
         LayoutModule,
