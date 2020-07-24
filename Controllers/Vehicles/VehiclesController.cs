@@ -37,6 +37,7 @@ namespace Brokerage.Controllers.Vehicles
 
             var vehicle = mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
             vehicle.LastUpdate = DateTime.Now;
+            
 
             repository.Add(vehicle);
             await unitOfWork.CompleteAsync();
@@ -49,25 +50,25 @@ namespace Brokerage.Controllers.Vehicles
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVehicle(int id, [FromForm] SaveVehicleResource vehicleResource)
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+			return BadRequest(ModelState);
 
-            var vehicle = await repository.GetVehicle(id);
+			var vehicle = await repository.GetVehicle(id);
 
-            if (vehicle == null)
-                return NotFound();
+			if (vehicle == null)
+			return NotFound();
 
-            mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
-            vehicle.LastUpdate = DateTime.Now;
+			mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
+			vehicle.LastUpdate = DateTime.Now;
 
-            await unitOfWork.CompleteAsync();
+			await unitOfWork.CompleteAsync();
 
-            vehicle = await repository.GetVehicle(vehicle.Id);
-            var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
+			vehicle = await repository.GetVehicle(vehicle.Id);
+			var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
 
-            return Ok(result);
+			return Ok(result);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
@@ -110,5 +111,7 @@ namespace Brokerage.Controllers.Vehicles
 
             return mapper.Map<QueryResult<Vehicle>, QueryResultResource<VehicleResource>>(queryResult);
         }
+
+       
     }
 }

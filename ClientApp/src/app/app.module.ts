@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { FullComponent } from './layouts/full/full.component';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FullComponent } from './layouts/full/full.component';
     FormsModule,
     ApiAuthorizationModule,
     AppRoutingModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule,     
+    ToastyModule.forRoot(),
     NoopAnimationsModule,
         LayoutModule,
         MatButtonModule,

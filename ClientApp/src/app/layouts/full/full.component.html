@@ -1,4 +1,5 @@
 <div class="wrapper">
+  
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -74,20 +75,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a [routerLink]="['/vehicle/list']" class="nav-link" [routerLinkActive]="['active']">
-                  <i class="fas fa-list nav-icon"></i>
+                  <!-- <i class="fas fa-list nav-icon"></i> -->
                   <p>Vehicles</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a [routerLink]="['/vehicle/new']" class="nav-link" [routerLinkActive]="['active']">
-                  <i class="fas fa-edit nav-icon"></i>
-                  <p>New vehicle</p>
+                  <!-- <i class="fas fa-edit nav-icon"></i> -->
+                  <p>Add vehicle</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a [routerLink]="['/vehicle/model']" class="nav-link">
-                  <i class="fas fa-edit nav-icon"></i>
-                  <p>New Model</p>
+                  <!-- <i class="fas fa-edit nav-icon"></i> -->
+                  <p>Add Model</p>
                 </a>
               </li>
               
@@ -135,6 +136,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <ng2-toasty [position]="'top-center'"></ng2-toasty>
     <router-outlet></router-outlet>
   </div>
   <!-- /.content-wrapper -->

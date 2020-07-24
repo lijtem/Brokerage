@@ -8,14 +8,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
+
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent],
   imports: [
     CommonModule,
     VehiclesRoutingModule,
@@ -24,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
+    FormsModule,
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,

@@ -29,6 +29,7 @@
               "src/styles.css",
               "node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/ng2-toasty/bundles/style-bootstrap.css",
               "node_modules/admin-lte/docs_html/assets/css/adminlte.css"
             ],
             "scripts": [
