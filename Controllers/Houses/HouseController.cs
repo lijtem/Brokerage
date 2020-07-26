@@ -43,5 +43,13 @@ namespace Brokerage.Controllers.Houses
 
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<QueryResultResource<HouseResource>> GetHouses(HouseQueryResource filterResource)
+        {
+            var filter = mapper.Map<HouseQueryResource, HouseQuery>(filterResource);
+            var queryResult = await repository.GetHouses(filter);
+
+            return mapper.Map<QueryResult<House>, QueryResultResource<HouseResource>>(queryResult);
+        }
     }
 }

@@ -9,9 +9,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HouseListComponent } from './house-list/house-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
-  declarations: [HouseFormComponent],
+  declarations: [HouseFormComponent, HouseListComponent],
   imports: [
     CommonModule,
     HousesRoutingModule,
@@ -20,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ]
 })
 export class HousesModule { }

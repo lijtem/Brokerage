@@ -28,6 +28,7 @@ namespace Brokerage
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+            services.AddScoped<IHouseRepository, HouseRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(MappingProfile));

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Brokerage.Controllers.Resources
 {
-    public class CityResource
+    public class CityResource : KeyValuePairResource
     {
         public ICollection<KeyValuePairResource> Locations { get; set; }
         public CityResource()
