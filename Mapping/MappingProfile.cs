@@ -25,6 +25,15 @@ namespace Brokerage.Mapping
               .ForMember(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.ContactName, Email = v.ContactEmail, Phone = v.ContactPhone }))
               .ForMember(vr => vr.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new KeyValuePairResource { Id = vf.Feature.Id, Name = vf.Feature.Name })));
             // .ForMember(vr => vr.Photos, opt => opt.MapFrom(v => v.Photos.Select(vf => new Photo { FileName = vf.FileName})));
+            //House
+            CreateMap<City, CityResource>();
+            CreateMap<City, KeyValuePairResource>();
+            CreateMap<Location, KeyValuePairResource>();
+            CreateMap<House, SaveHouseResource>()
+                 .ForMember(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.ContactName, Email = v.ContactEmail, Phone = v.ContactPhone }));
+            CreateMap<House, HouseResource>()
+                .ForMember(hr => hr.City, opt => opt.MapFrom(h => h.Location.City))
+                .ForMember(hr => hr.Contact, opt => opt.MapFrom(h => new ContactResource { Name = h.ContactName, Email = h.ContactEmail, Phone = h.ContactPhone }));
 
             // API Resource to Domain
             CreateMap<VehicleQueryResource, VehicleQuery>();
@@ -45,6 +54,13 @@ namespace Brokerage.Mapping
                   foreach (var f in addedFeatures)
                       v.Features.Add(f);
               });
+            // house
+            CreateMap<HouseQueryResource, HouseQuery>();
+            CreateMap<SaveHouseResource, House>()
+                .ForMember(h => h.Id, opt => opt.Ignore())
+                .ForMember(h => h.ContactName, opt => opt.MapFrom(hr => hr.Contact.Name))
+                 .ForMember(h => h.ContactEmail, opt => opt.MapFrom(hr => hr.Contact.Email))
+                  .ForMember(h => h.ContactPhone, opt => opt.MapFrom(hr => hr.Contact.Phone));
         }
     }
 }

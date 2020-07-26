@@ -17,6 +17,15 @@ export const routes: Routes = [
         (m) => m.VehiclesModule
       ),
   },
+  {
+    path: "house",
+    component: FullComponent,
+    // canActivate: [NgxPermissionsGuard],
+    loadChildren: () =>
+      import("./modules/houses/houses.module").then(
+        (m) => m.HousesModule
+      ),
+  },
 ];
 
 @NgModule({
