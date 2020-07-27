@@ -151,10 +151,9 @@
                 <div class="col">
                   <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Owner</mat-label>
-                    <mat-select formControlName="isOwner">
-                      <mat-option value=true>Self</mat-option>
-                      <mat-option value=false>Broker</mat-option>                      
-                      
+                    <mat-select formControlName="isOwner" >
+                      <mat-option [value]=true>Self</mat-option>
+                      <mat-option [value]=false>Broker</mat-option>                 
                     </mat-select>
                   </mat-form-field>
                 </div>

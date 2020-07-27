@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { VehiclesRoutingModule } from './vehicles-routing.module';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { MatInputModule } from '@angular/material/input';

@@ -15,6 +15,50 @@
   </div>
   <section class="content">
     <div class="container-fluid px-4"> 
+      <form [formGroup]="houseForm" novalidate>
+
+      <div class="row">
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>City</mat-label>
+            <mat-select  formControlName="city" (selectionChange)="onCityChange()">
+              <mat-option *ngFor="let city of cities" [value]="city.id">
+                {{ city.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Location</mat-label>
+            <mat-select  formControlName="location">
+              <mat-option *ngFor="let location of locations" [value]="location.id">
+                {{ location.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Owner</mat-label>
+            <mat-select formControlName="isOwner" >
+              <mat-option [value]=true>Self</mat-option>
+              <mat-option [value]=false>Broker</mat-option>                 
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 text-right align-self-center">          
+          <button mat-raised-button color="primary" (click)="applyFilter()" class="mr-3">Search</button>      
+          <button mat-raised-button  (click)="resetFilter()"  class="mr-3">Clear</button>     
+       </div>
+      </div>
+      </form>
       <div class="row">
      
         <div class="col-md-12">

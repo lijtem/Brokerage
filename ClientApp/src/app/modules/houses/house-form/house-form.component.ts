@@ -17,8 +17,8 @@ export class HouseFormComponent implements OnInit {
     title: [null],
     description: [null],
     category: null,
-    propertyFor: null,
-    city: [null],
+    propertyFor: ['Sale'],
+    city: [2],
     location: [null],
     price: [null],
     bedrooms: [0],
@@ -29,7 +29,7 @@ export class HouseFormComponent implements OnInit {
     email: [null],
     phone: [null],
     code: [null],
-    isOwner: [null],
+    isOwner: [true],
   });
   house: SaveHouseModel = {} as SaveHouseModel;
   
@@ -43,11 +43,12 @@ export class HouseFormComponent implements OnInit {
   ngOnInit(): void {
     this.houseService.getLocations().subscribe(dt => {
       this.cities = dt;
+      this.populateLocation();
     })
+   
   }
 
   onSubmit() {
-    debugger;
     if(this.houseForm.valid){
       this.house.title = this.houseForm.controls.title.value;
       this.house.description = this.houseForm.controls.description.value;

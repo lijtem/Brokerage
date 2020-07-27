@@ -65,7 +65,8 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link " [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: false }" [routerLink]="['/vehicle']" >
               <i class="nav-icon fas fa-car-alt"></i>
               <p>
                 Vehicles
@@ -85,18 +86,18 @@
                   <p>Add vehicle</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a [routerLink]="['/vehicle/model']" class="nav-link">
-                  <!-- <i class="fas fa-edit nav-icon"></i> -->
+                  <i class="fas fa-edit nav-icon"></i>
                   <p>Add Model</p>
                 </a>
-              </li>
+              </li> -->
               
             </ul>
           </li>
           
-          <li class="nav-item has-treeview menu-close">
-            <a [routerLink]="['/house/list']" class="nav-link" [routerLinkActive]="['active']">
+          <li class="nav-item has-treeview menu-open">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/house']" >
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Houses
@@ -106,22 +107,22 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a [routerLink]="['/house/list']" class="nav-link" [routerLinkActive]="['active']">
-                  <i class="fas fa-list nav-icon"></i>
+                  <!-- <i class="fas fa-list nav-icon"></i> -->
                   <p>Houses</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a [routerLink]="['/house/new']" class="nav-link" [routerLinkActive]="['active']">
-                  <i class="fas fa-edit nav-icon"></i>
+                  <!-- <i class="fas fa-edit nav-icon"></i> -->
                   <p>New house</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a [routerLink]="['/vehicle/model']" class="nav-link">
                   <i class="fas fa-edit nav-icon"></i>
                   <p>New Model</p>
                 </a>
-              </li>
+              </li> -->
               
             </ul>
           </li>
