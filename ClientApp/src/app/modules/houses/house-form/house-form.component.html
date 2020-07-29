@@ -159,8 +159,9 @@
                 </div>
               </div>
             </mat-card-content>
-            <mat-card-actions>
-              <button mat-raised-button color="primary" type="submit">Submit</button>
+            <mat-card-actions style="padding-top: 48px;">
+              <button mat-raised-button  (click)="cancel()"  style="float: right;margin-right: 24px;">Cancel</button>
+              <button mat-raised-button color="primary"  type="submit" style="float: right;margin-right: 24px;">Submit</button>
             </mat-card-actions>
           </mat-card>
         </form>

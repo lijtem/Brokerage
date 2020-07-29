@@ -103,7 +103,7 @@ export class VehicleListComponent implements  OnInit {
   }
 
   delete(element) {
-    debugger
+    
     if (confirm("Are you sure?")) {
       this.vehicleService.delete(element)
         .subscribe(x => {

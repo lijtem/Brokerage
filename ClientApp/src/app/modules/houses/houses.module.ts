@@ -10,9 +10,10 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HouseListComponent } from './house-list/house-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { HouseEditComponent } from './house-edit/house-edit.component';
 
 @NgModule({
-  declarations: [HouseFormComponent, HouseListComponent],
+  declarations: [HouseFormComponent, HouseListComponent, HouseEditComponent],
   imports: [
     CommonModule,
     HousesRoutingModule,

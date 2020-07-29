@@ -51,5 +51,53 @@ namespace Brokerage.Controllers.Houses
 
             return mapper.Map<QueryResult<House>, QueryResultResource<HouseResource>>(queryResult);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetHouse(int id)
+        {
+            var house = await repository.GetHouse(id);
+
+            if (house == null)
+                return NotFound();
+
+            var houseResource = mapper.Map<House, HouseResource>(house);
+
+            return Ok(houseResource);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateHouse(int id, [FromBody] SaveHouseResource houseResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var house = await repository.GetHouse(id);
+            if (house == null)
+                return NotFound();
+
+            mapper.Map<SaveHouseResource, House>(houseResource, house);
+            house.LastUpdate = DateTime.Now;
+
+            await unitOfWork.CompleteAsync();
+
+            house = await repository.GetHouse(house.Id);
+            var result = mapper.Map<House, HouseResource>(house);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHouse(int id)
+        {
+            var house = await repository.GetHouse(id, includeRelated: false);
+
+            if (house == null)
+                return NotFound();
+
+            repository.Remove(house);
+            await unitOfWork.CompleteAsync();
+
+            return Ok(id);
+        }
     }
 }

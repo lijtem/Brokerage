@@ -1,0 +1,172 @@
+<div class="content-header pb-0">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h4 class="m-0 text-dark">Edit house</h4>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">House</a></li>
+            <li class="breadcrumb-item active">edit</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <form [formGroup]="houseForm" novalidate (ngSubmit)="onSubmit()">
+            <mat-card class="shipping-card">
+              <!-- <mat-card-header>
+        <mat-card-title>Shipping Information</mat-card-title>
+      </mat-card-header> -->
+              <mat-card-content>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Title</mat-label>
+                      <input matInput formControlName="title">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Description</mat-label>
+                      <input matInput formControlName="description">
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Category</mat-label>
+                      <mat-select formControlName="category">
+                        <mat-option value="Apartment">Apartment</mat-option>
+                        <mat-option value="CommercialProperty">Commercial Property</mat-option>                      
+                        <mat-option value="Condominium">Condominium</mat-option>
+                        <mat-option value="Land">Land</mat-option>
+                        <mat-option value="Villa">Villa</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Property For</mat-label>
+                      <mat-select formControlName="propertyFor">
+                        <mat-option value="Sale">Sale</mat-option>
+                        <mat-option value="Rent">Rent</mat-option> 
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>City</mat-label>
+                      <mat-select  formControlName="city" (selectionChange)="onCityChange()">
+                        <mat-option *ngFor="let city of cities" [value]="city.id">
+                          {{ city.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="houseForm.controls['city'].hasError('required')">
+                        City is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Location</mat-label>
+                      <mat-select  formControlName="location">
+                        <mat-option *ngFor="let location of locations" [value]="location.id">
+                          {{ location.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label># Bed rooms</mat-label>
+                      <input matInput type="number" formControlName="bedrooms">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label># Bath rooms</mat-label>
+                      <input matInput type="number" formControlName="bathrooms">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Area in m.sq</mat-label>
+                      <input matInput formControlName="area">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label># Floors</mat-label>
+                      <input matInput type="number" formControlName="noFloors">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Code</mat-label>
+                      <input matInput formControlName="code">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Price</mat-label>
+                      <input matInput formControlName="price">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col my-3">
+                    <h5>Contact</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Name</mat-label>
+                      <input matInput formControlName="name">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Phone</mat-label>
+                      <input matInput formControlName="phone">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Owner</mat-label>
+                      <mat-select formControlName="isOwner" >
+                        <mat-option [value]=true>Self</mat-option>
+                        <mat-option [value]=false>Broker</mat-option>                 
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions style="padding-top: 48px;">
+                <button mat-raised-button  (click)="cancel()"  style="float: right;margin-right: 24px;">Cancel</button>
+                <button mat-raised-button color="primary"  type="submit" style="float: right;margin-right: 24px;">Submit</button>
+              </mat-card-actions>            
+            </mat-card>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+  </section>

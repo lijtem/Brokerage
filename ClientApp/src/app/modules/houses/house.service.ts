@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SaveHouseModel } from './models/house-model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,12 @@ export class HouseService {
   getHouses(filter){
     return this.http.get(this.houseEndpoint + '?' + this.toQueryString(filter)).pipe(res => res);
   }
+
+  getHouse(id){
+    return this.http.get<SaveHouseModel>('/api/houses/' + id).pipe(res => res);
+  }
+
+  
   
   toQueryString(obj) {
     var parts = [];
@@ -33,5 +40,15 @@ export class HouseService {
     }
 
     return parts.join('&');
+  }
+
+  update(house: SaveHouseModel) {    
+    return this.http.put('/api/houses/' + house.id, house)
+      .pipe(res => res);
+  }
+
+  delete(id){
+    return this.http.delete('/api/houses/' + id)
+      .pipe(res => res);
   }
 }

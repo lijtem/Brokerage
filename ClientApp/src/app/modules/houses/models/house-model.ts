@@ -44,5 +44,4 @@ export interface SaveHouseModel {
     area: string;
     noFloors: number;
     Built: string;
-
 }

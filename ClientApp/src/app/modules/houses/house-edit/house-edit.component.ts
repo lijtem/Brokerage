@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { HouseService } from '../house.service';
-import { Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
 import { SaveHouseModel } from '../models/house-model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastyService } from 'ng2-toasty';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-house-form',
-  templateUrl: './house-form.component.html',
-  styleUrls: ['./house-form.component.css']
+  selector: 'app-house-edit',
+  templateUrl: './house-edit.component.html',
+  styleUrls: ['./house-edit.component.css']
 })
-export class HouseFormComponent implements OnInit {
+export class HouseEditComponent implements OnInit {
   cities: any;
   locations: any[];
   houseForm = this.fb.group({
@@ -18,7 +19,7 @@ export class HouseFormComponent implements OnInit {
     description: [null],
     category: null,
     propertyFor: ['Sale'],
-    city: [2],
+    city: [null],
     location: [null],
     price: [null],
     bedrooms: [0],
@@ -31,21 +32,53 @@ export class HouseFormComponent implements OnInit {
     code: [null],
     isOwner: [true],
   });
-  house: SaveHouseModel = {} as SaveHouseModel;
-  
-
-
-
+  house: any = {} as any;
   constructor(private fb: FormBuilder,
     private houseService: HouseService,
     private router: Router,
-    private toastyService: ToastyService) { }
-  ngOnInit(): void {
+    private route: ActivatedRoute,
+    private toastyService: ToastyService) { 
+      route.params.subscribe(p => {
+        this.house.id = +p['id'];
+      });
+    }
+
+  ngOnInit() {
+    // var sources = [
+    //   this.houseService.getLocations(),
+    //   this.houseService.getHouse(this.house.id)
+    // ]
+    // Observable.forkJoin(sources).subscribe(data => {
+    //   this.cities = data[0];     
+    //   this.house = data[1];
+    //   this.populateForm()
+    //   this.populateLocation();
+    // }, err => {
+    //   if (err.status == 404)
+    //     this.router.navigate(['/house']);
+    // });
     this.houseService.getLocations().subscribe(dt => {
       this.cities = dt;
       this.populateLocation();
+      this.houseService.getHouse(this.house.id).subscribe( dt => {
+        this.house = dt;
+        this.populateForm()
+      })
     })
+    
+  }
+  populateForm() {
    
+    this.houseForm.patchValue(
+      this.house
+    )
+    this.houseForm.controls.name.patchValue(this.house.contact.name);
+    this.houseForm.controls.email.patchValue(this.house.contact.email);
+    this.houseForm.controls.phone.patchValue(this.house.contact.phone);
+    this.houseForm.controls.city.patchValue(this.house.city.id);
+    this.populateLocation();
+    this.houseForm.controls.location.patchValue(this.house.location.id);
+    
   }
 
   onSubmit() {
@@ -70,7 +103,7 @@ export class HouseFormComponent implements OnInit {
       }       
     }
 
-    this.houseService.create(this.house).subscribe(
+    this.houseService.update(this.house).subscribe(
       res => {
         this.toastyService.success({
           title: 'Success',
@@ -91,8 +124,8 @@ export class HouseFormComponent implements OnInit {
     var selectedLocation = this.cities.find(m => m.id == this.houseForm.controls.city.value);
     this.locations = selectedLocation ? selectedLocation.locations : [];
   }
-
   cancel(){
     this.router.navigate(['/house/list']);
   }
+  
 }

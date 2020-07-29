@@ -97,4 +97,17 @@ export class HouseListComponent implements OnInit {
     this.populateProperty();
   }
 
+  delete(element) {
+    
+    if (confirm("Are you sure?")) {
+      this.houseService.delete(element)
+        .subscribe(x => {
+          this.populateProperty();
+        });
+    }
+  }
+  edit(element){
+    this.router.navigate(['/house/edit/'+element]);
+  }
+
 }

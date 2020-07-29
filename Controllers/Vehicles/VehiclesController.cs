@@ -96,13 +96,7 @@ namespace Brokerage.Controllers.Vehicles
 
             return Ok(vehicleResource);
         }
-        //[HttpGet]
-        //public async Task<IEnumerable<VehicleResource>> GetVehicles()
-        //{
-        //    var vehicles = await repository.GetVehicles();
-        //    return mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
 
-        //}
         [HttpGet]
         public async Task<QueryResultResource<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
