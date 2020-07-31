@@ -95,7 +95,7 @@ export class HouseEditComponent implements OnInit {
       this.house.area = this.houseForm.controls.area.value;          
       this.house.price = this.houseForm.controls.price.value;      
       this.house.code = this.houseForm.controls.code.value;  
-      this.house.isOwner = this.houseForm.controls.isOwner.value == 'true'? true: false; 
+      this.house.isOwner = this.houseForm.controls.isOwner.value;
       this.house.contact  =  {
         name: this.houseForm.controls.name.value,
         phone: this.houseForm.controls.phone.value,

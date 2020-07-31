@@ -13,10 +13,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
+import { PaginationComponent } from 'src/app/shared/pagination.component';
 
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, PaginationComponent],
   imports: [
     CommonModule,
     VehiclesRoutingModule,

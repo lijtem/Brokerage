@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./house-list.component.css']
 })
 export class HouseListComponent implements OnInit {
-  private readonly PAGE_SIZE = 10;
+  private readonly PAGE_SIZE = 8;
   cities: any;
   locations: any[];
   queryResult: any = {};
@@ -24,7 +24,7 @@ export class HouseListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'house', 'year', 'contact', 'phone', 'isOwner', 'code', 'action'];
+  displayedColumns: string[] = [ 'house', 'year', 'contact', 'phone',  'code', 'action'];
 
   houseForm = this.fb.group({
     city: [null],
@@ -108,6 +108,11 @@ export class HouseListComponent implements OnInit {
   }
   edit(element){
     this.router.navigate(['/house/edit/'+element]);
+  }
+
+  onPageChange(page) {
+    this.query.page = page;
+    this.populateProperty();
   }
 
 }

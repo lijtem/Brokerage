@@ -16,7 +16,6 @@
   <section class="content">
     <div class="container-fluid px-4"> 
       <form [formGroup]="houseForm" novalidate>
-
       <div class="row">
         <div class="col-2">
           <mat-form-field class="full-width" appearance="fill">
@@ -59,17 +58,17 @@
        </div>
       </div>
       </form>
-      <div class="row">
-     
+      <div class="row " style="min-height:calc(90vh - 207px)">
+       
         <div class="col-md-12">
           <div class="mat-elevation-z8">
             <table mat-table class="full-width-table" [dataSource]="dataSource" matSort>
 
 
-              <ng-container matColumnDef="id">
+              <!-- <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> Id. </th>
                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
+              </ng-container> -->
 
               <!-- Car Column -->
               <ng-container matColumnDef="house">
@@ -96,10 +95,10 @@
               </ng-container>
 
               <!-- IsOwner Column -->
-              <ng-container matColumnDef="isOwner">
+              <!-- <ng-container matColumnDef="isOwner">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Owner </th>
                 <td mat-cell *matCellDef="let element"> {{element.isOwner}} </td>
-              </ng-container>
+              </ng-container> -->
 
               <!-- Code Column -->
               <ng-container matColumnDef="code">
@@ -124,6 +123,13 @@
           
           </div>
         </div>
-      </div>     
+        
+        
+      </div> 
+      <div class="row align-items-end" >
+        <div class="col-md-12 align-self-end">         
+          <pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
+        </div>
+      </div>
     </div>
   </section>

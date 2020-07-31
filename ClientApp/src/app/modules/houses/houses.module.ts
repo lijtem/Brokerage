@@ -11,9 +11,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HouseListComponent } from './house-list/house-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { HouseEditComponent } from './house-edit/house-edit.component';
+import { PaginationComponent } from 'src/app/shared/pagination.component';
 
 @NgModule({
-  declarations: [HouseFormComponent, HouseListComponent, HouseEditComponent],
+  declarations: [HouseFormComponent, HouseListComponent, HouseEditComponent, PaginationComponent],
   imports: [
     CommonModule,
     HousesRoutingModule,
@@ -24,7 +25,7 @@ import { HouseEditComponent } from './house-edit/house-edit.component';
     MatCardModule,
     ReactiveFormsModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class HousesModule { }

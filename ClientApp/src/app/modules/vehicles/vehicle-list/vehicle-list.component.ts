@@ -16,7 +16,7 @@ export class VehicleListComponent implements  OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  private readonly PAGE_SIZE = 10;
+  private readonly PAGE_SIZE = 8;
  
   makes: any;
   models: any[];
@@ -30,7 +30,7 @@ export class VehicleListComponent implements  OnInit {
   };
 
   
-  displayedColumns: string[] = ['id', 'vehicle', 'year', 'contact', 'phone', 'isOwner', 'code', 'action'];
+  displayedColumns: string[] = [ 'vehicle', 'year', 'contact', 'phone',  'code', 'action'];
   vehicles: Object;
   constructor(private vehicleService: VehicleService,private router: Router,) { 
     this.dataSource = new MatTableDataSource(this.queryResult.items);
