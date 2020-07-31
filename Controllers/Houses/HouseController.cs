@@ -6,11 +6,13 @@ using AutoMapper;
 using Brokerage.Controllers.Resources;
 using Brokerage.Core;
 using Brokerage.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brokerage.Controllers.Houses
 {
+    [Authorize]
     [Route("/api/houses")]
     public class HouseController : ControllerBase
     {

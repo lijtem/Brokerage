@@ -13,11 +13,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
-import { PaginationComponent } from 'src/app/shared/pagination.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, PaginationComponent],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent],
   imports: [
     CommonModule,
     VehiclesRoutingModule,
@@ -30,7 +31,9 @@ import { PaginationComponent } from 'src/app/shared/pagination.component';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTabsModule,
+    SharedModule
   ]
 })
 export class VehiclesModule { }

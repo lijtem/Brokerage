@@ -12,151 +12,180 @@
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
-  </div>
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- <form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()"> -->
-            <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
-            <mat-card class="shipping-card">
-              <!-- <mat-card-header>
-                <mat-card-title>Shipping Information</mat-card-title>
-              </mat-card-header> -->
-              <mat-card-content>
-                <div class="row">
-                  <div class="col">
-                     <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Make</mat-label>
-                      <mat-select id="make" placeholder="Make" (selectionChange)="onMakeChange()"  name="makeId"
-                      [(ngModel)]="vehicle.makeId" #make="ngModel">
-                        <mat-option *ngFor="let make of makes" [value]="make.id">
-                          {{ make.name }}
-                        </mat-option>
-                      </mat-select>                
-                      <!-- <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
-                        Make is <strong>required</strong>
-                      </mat-error> -->
-                    </mat-form-field>               
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Model</mat-label>
-                      <mat-select placeholder="Model" [(ngModel)]="vehicle.modelId" name="modelId" >
-                        <mat-option *ngFor="let model of models" [value]="model.id">
-                          {{ model.name }}
-                        </mat-option>
-                      </mat-select>
-                      <!-- <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
-                        Model is <strong>required</strong>
-                      </mat-error> -->
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Year Made</mat-label>
-                      <input matInput placeholder="Year made" id="yearMade" name="yearMade" [(ngModel)]="vehicle.yearMade">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Color</mat-label>
-                      <input matInput placeholder="Color" id="color" name="color" [(ngModel)]="vehicle.color">
-                    </mat-form-field>
-                  </div>
+</div>
+<section class="content">
+  <ul class="nav nav-tabs mx-2" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Vehicle</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="photo" aria-selected="false">Photo</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="col-md-12">
+        <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <mat-card class="shipping-card">
+          <!-- <mat-card-header>
+            <mat-card-title>Shipping Information</mat-card-title>
+          </mat-card-header> -->
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                 <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Make</mat-label>
+                  <mat-select id="make" placeholder="Make" (selectionChange)="onMakeChange()"  name="makeId"
+                  [(ngModel)]="vehicle.makeId" #make="ngModel">
+                    <mat-option *ngFor="let make of makes" [value]="make.id">
+                      {{ make.name }}
+                    </mat-option>
+                  </mat-select>                
+                  <!-- <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+                    Make is <strong>required</strong>
+                  </mat-error> -->
+                </mat-form-field>               
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Model</mat-label>
+                  <mat-select placeholder="Model" [(ngModel)]="vehicle.modelId" name="modelId" >
+                    <mat-option *ngFor="let model of models" [value]="model.id">
+                      {{ model.name }}
+                    </mat-option>
+                  </mat-select>
+                  <!-- <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+                    Model is <strong>required</strong>
+                  </mat-error> -->
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Year Made</mat-label>
+                  <input matInput placeholder="Year made" id="yearMade" name="yearMade" [(ngModel)]="vehicle.yearMade">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Color</mat-label>
+                  <input matInput placeholder="Color" id="color" name="color" [(ngModel)]="vehicle.color">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Transmission</mat-label>
+                  <mat-select id="transmission"  [(ngModel)]="vehicle.transmission" name="transmission">
+                    <mat-option value="Manual">Manula</mat-option>
+                      <mat-option value="Automatic">Automatic</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="fill" class="full-width">
+                  <mat-label>Engine Type</mat-label>
+                  <mat-select id="engineType"  [(ngModel)]="vehicle.engineType" name="engineType"  #engineType="ngModel">
+                    <mat-option value="Benzine">Benzine</mat-option>
+                    <mat-option value="Desiel">Desiel</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Engine Size</mat-label>
+                  <input matInput placeholder="Engine Size" id="engineSize" name="engineSize" [(ngModel)]="vehicle.engineSize">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Price</mat-label>
+                  <input matInput placeholder="Price" id="price" name="price" [(ngModel)]="vehicle.price">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col my-3">
+                <h5>Features</h5>
+              </div>
+            </div>
+            <div class="row">
+             
+                <div *ngFor="let f of features" class="checkbox col-2">
+                  <label for="feature{{ f.id}}">
+                    <input type="checkbox" name="" id="feature{{ f.id }}" (change)="onFeatureToggle(f.id, $event)"
+                      [checked]="vehicle.features.includes(f.id)">
+                    {{f.name}}
+                  </label>
                 </div>
-                <div class="row">
-                  
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Transmission</mat-label>
-                      <mat-select id="transmission"  [(ngModel)]="vehicle.transmission" name="transmission">
-                        <mat-option value="Manual">Manula</mat-option>
-                          <mat-option value="Automatic">Automatic</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field appearance="fill" class="full-width">
-                      <mat-label>Engine Type</mat-label>
-                      <mat-select id="engineType"  [(ngModel)]="vehicle.engineType" name="engineType"  #engineType="ngModel">
-                        <mat-option value="Benzine">Benzine</mat-option>
-                        <mat-option value="Desiel">Desiel</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Engine Size</mat-label>
-                      <input matInput placeholder="Engine Size" id="engineSize" name="engineSize" [(ngModel)]="vehicle.engineSize">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Price</mat-label>
-                      <input matInput placeholder="Price" id="price" name="price" [(ngModel)]="vehicle.price">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="row" >
-                  <div class="col my-3">
-                    <h5>Features</h5>
-                  </div>
-                </div>
-                <div class="row">
-                 
-                    <div *ngFor="let f of features" class="checkbox col-2">
-                      <label for="feature{{ f.id}}">
-                        <input type="checkbox" name="" id="feature{{ f.id }}" (change)="onFeatureToggle(f.id, $event)"
-                          [checked]="vehicle.features.includes(f.id)">
-                        {{f.name}}
-                      </label>
-                    </div>
-                  
-                  
-                </div>
-                <div class="row">
-                  <div class="col my-3">
-                    <h5>Contact</h5>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Name</mat-label>
-                      <input matInput placeholder="Name" id="name" name="name" [(ngModel)]="vehicle.contact.name">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Phone</mat-label>
-                      <input matInput placeholder="Phone" id="phone" name="phone" [(ngModel)]="vehicle.contact.phone">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Email</mat-label>
-                      <input matInput placeholder="Email" id="email" name="email" [(ngModel)]="vehicle.contact.email">
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <label for="IsOwner">
-                      <input type="checkbox" name="" id="IsOwner" (change)="onOwnerToggle($event)" [checked]="vehicle.IsOwner">
-                      IsOwner
-                    </label>
-                  </div>
-                </div>
-                
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit" style="float: right;margin-top: 24px;margin-right: 24px;">Submit</button>
-              </mat-card-actions>
-            </mat-card>
-          </form>
-          </div>
-        </div>
+              
+              
+            </div>
+            <div class="row">
+              <div class="col my-3">
+                <h5>Contact</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Name" id="name" name="name" [(ngModel)]="vehicle.contact.name">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Phone</mat-label>
+                  <input matInput placeholder="Phone" id="phone" name="phone" [(ngModel)]="vehicle.contact.phone">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="Email" id="email" name="email" [(ngModel)]="vehicle.contact.email">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <label for="IsOwner">
+                  <input type="checkbox" name="" id="IsOwner" (change)="onOwnerToggle($event)" [checked]="vehicle.IsOwner">
+                  IsOwner
+                </label>
+              </div>
+            </div>
+            
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" style="float: right;margin-top: 24px;margin-right: 24px;">Submit</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+      </div>
     </div>
-  </section>
-  
-  
-  
+    <div class="tab-pane fade" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+      <div class="col-md-12">
+        <form #p="ngForm" (ngSubmit)="uploadPhoto()" novalidate>
+        <mat-card class="shipping-card">
+          <mat-card-content>
+            
+            <div class="row" *ngIf="photos.length < 3">
+              <div class="col">
+                <input type="file" #fileInput placeholder="Photo" id="photo" name="photo" >
+                <button mat-raised-button color="primary" type="submit" style="padding-left: 24px;">Upload</button>
+
+
+              </div>
+            </div>
+            <div class="row mt-4">             
+              <img *ngFor="let photo of photos" src="assets/img/carUploads/{{photo.fileName}}" class="img-thumbnail" alt="">       
+          
+            </div>
+            
+          </mat-card-content>
+        
+        </mat-card>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -36,11 +36,11 @@ namespace Brokerage.Core.Models
         public bool IsOwner { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        public ICollection<HousePhoto> HousePhotos { get; set; }
+        public ICollection<HousePhoto> Photos { get; set; }
 
         public House()
         {
-            HousePhotos = new Collection<HousePhoto>();
+            Photos = new Collection<HousePhoto>();
         }
     }
 }

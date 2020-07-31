@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HouseService } from '../house.service';
 import { SaveHouseModel } from '../models/house-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { Observable } from 'rxjs';
+import { HousePhotoService } from '../house-photo.service';
 
 @Component({
   selector: 'app-house-edit',
@@ -12,8 +13,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./house-edit.component.css']
 })
 export class HouseEditComponent implements OnInit {
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
+
   cities: any;
   locations: any[];
+  photos: any = [];
   houseForm = this.fb.group({
     title: [null],
     description: [null],
@@ -35,6 +39,7 @@ export class HouseEditComponent implements OnInit {
   house: any = {} as any;
   constructor(private fb: FormBuilder,
     private houseService: HouseService,
+    private photoService: HousePhotoService,
     private router: Router,
     private route: ActivatedRoute,
     private toastyService: ToastyService) { 
@@ -44,23 +49,12 @@ export class HouseEditComponent implements OnInit {
     }
 
   ngOnInit() {
-    // var sources = [
-    //   this.houseService.getLocations(),
-    //   this.houseService.getHouse(this.house.id)
-    // ]
-    // Observable.forkJoin(sources).subscribe(data => {
-    //   this.cities = data[0];     
-    //   this.house = data[1];
-    //   this.populateForm()
-    //   this.populateLocation();
-    // }, err => {
-    //   if (err.status == 404)
-    //     this.router.navigate(['/house']);
-    // });
     this.houseService.getLocations().subscribe(dt => {
       this.cities = dt;
       this.populateLocation();
       this.houseService.getHouse(this.house.id).subscribe( dt => {
+       
+        this.photos = dt.photos;
         this.house = dt;
         this.populateForm()
       })
@@ -127,5 +121,12 @@ export class HouseEditComponent implements OnInit {
   cancel(){
     this.router.navigate(['/house/list']);
   }
-  
+  uploadPhoto(){
+    var nativeEl: HTMLInputElement = this.fileInput.nativeElement;
+    this.photoService.upload(this.house.id,nativeEl.files[0]).subscribe(
+      dt => {
+        this.photos.push(dt);
+      }
+    )
+  }
 }

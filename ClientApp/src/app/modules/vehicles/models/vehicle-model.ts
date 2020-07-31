@@ -26,6 +26,7 @@ export interface KeyValuePairModel {
     engineType: string;
     engineSize: string;
     price: string;
+    photos?: any;
   }
   
   export interface SaveVehicleModel {
@@ -42,6 +43,7 @@ export interface KeyValuePairModel {
     engineType: string;
     engineSize: string;
     price: string;
+    photos?: any;
   
   }
   

@@ -11,6 +11,7 @@ namespace Brokerage.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
+            CreateMap<HousePhoto, PhotoResource>();
             CreateMap<Photo, PhotoResource>();
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Make, MakeResource>();

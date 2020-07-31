@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../vehicle.service';
 import { ToastyService } from 'ng2-toasty';
 import { SaveVehicleModel, VehicleModel } from '../models/vehicle-model';
 import { Observable } from 'rxjs';
 import * as _ from 'underscore';
+import { PhotoService } from '../photo.service';
 
 @Component({
   selector: 'app-vehicle-edit',
@@ -12,8 +13,10 @@ import * as _ from 'underscore';
   styleUrls: ['./vehicle-edit.component.css']
 })
 export class VehicleEditComponent implements OnInit {
+ @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
   makes: any;
   models: any[];
+  photos: any[];
   features: any;
   vehicle: SaveVehicleModel = {
     modelId: 0,
@@ -36,7 +39,8 @@ export class VehicleEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private vehicleService: VehicleService,
-    private toastyService: ToastyService) {
+    private toastyService: ToastyService,
+    private photoService: PhotoService) {
       route.params.subscribe(p => {
         this.vehicle.id = +p['id'];
       });
@@ -78,6 +82,7 @@ export class VehicleEditComponent implements OnInit {
     this.vehicle.engineSize = v.engineSize;
     this.vehicle.engineType = v.engineType;
     this.vehicle.transmission = v.transmission;
+    this.photos= v.photos;
   }
 
   onMakeChange() {
@@ -124,6 +129,15 @@ export class VehicleEditComponent implements OnInit {
       this.vehicle.IsOwner = true;
     else
       this.vehicle.IsOwner = false
+  }
+
+  uploadPhoto(){
+    var nativeEl: HTMLInputElement = this.fileInput.nativeElement;
+    this.photoService.upload(this.vehicle.id,nativeEl.files[0]).subscribe(
+      dt => {
+        this.photos.push(dt);
+      }
+    )
   }
 
 }

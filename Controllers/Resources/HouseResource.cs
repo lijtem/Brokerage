@@ -27,7 +27,6 @@ namespace Brokerage.Controllers.Resources
         public string Area { get; set; }
         public int NoFloors { get; set; }
         public string Built { get; set; }
-
         public ICollection<HousePhoto> Photos { get; set; }
 
         public HouseResource()

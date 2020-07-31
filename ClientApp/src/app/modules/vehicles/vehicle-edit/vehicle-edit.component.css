@@ -4,8 +4,8 @@
   
   .shipping-card {
     min-width: 120px;
-    margin: 15px auto;
-    height: calc(100vh - 196px);
+    margin: 4px auto;
+    height: calc(100vh - 216px);
   }
   
   .mat-radio-button {

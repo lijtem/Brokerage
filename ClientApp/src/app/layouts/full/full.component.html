@@ -126,8 +126,18 @@
               
             </ul>
           </li>
-      
-         
+          <li class="nav-header">Admin</li>
+          <li class="nav-item">
+            <a href="Identity/Account/Register?returnUrl=/authentication/login" class="nav-link">
+              <i class="nav-icon far fa-user-alt"></i>
+              <p>
+                Register               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+        </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

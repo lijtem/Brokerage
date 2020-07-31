@@ -26,7 +26,7 @@ namespace Brokerage.Data
 
             return await context.Houses
                 .Include(v => v.Location).ThenInclude(vf => vf.City)
-                .Include(v => v.HousePhotos)
+                .Include(v => v.Photos)
                 .SingleOrDefaultAsync(v => v.Id == id);
 
         }
@@ -38,7 +38,7 @@ namespace Brokerage.Data
             var query = context.Houses
               .Include(v => v.Location)
                 .ThenInclude(m => m.City)
-                 .Include(v => v.HousePhotos)
+                 .Include(v => v.Photos)
               .AsQueryable();
 
             if (queryObj.CityId.HasValue)

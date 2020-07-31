@@ -8,6 +8,11 @@ export interface KeyValuePairModel {
     phone: string;
     email: string;
   }
+ 
+  export interface PhotoModel {
+    id: number;
+    fileName: string;
+  }
 export interface HouseModel {
     id: number;
     city: KeyValuePairModel;
@@ -44,4 +49,5 @@ export interface SaveHouseModel {
     area: string;
     noFloors: number;
     Built: string;
+    photos?: PhotoModel[];
 }

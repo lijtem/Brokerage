@@ -14,6 +14,17 @@
     </div><!-- /.container-fluid -->
   </div>
   <section class="content">
+    <ul class="nav nav-tabs mx-2" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">House</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="photo-tab" data-toggle="tab" href="#photo" role="tab" aria-controls="photo" aria-selected="false">Photo</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -169,4 +180,31 @@
         </div>
       </div>
     </div>
+    </div>
+     <div class="tab-pane fade" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+      <div class="col-md-12">
+        <form #p="ngForm" (ngSubmit)="uploadPhoto()" novalidate>
+        <mat-card class="shipping-card">
+          <mat-card-content>
+            
+            <div class="row" *ngIf="photos.length < 3">
+              <div class="col">
+                <input type="file" #fileInput placeholder="Photo" id="photo" name="photo" >
+                <button mat-raised-button color="primary" type="submit" style="padding-left: 24px;">Upload</button>
+
+
+              </div>
+            </div>
+            <div class="row mt-4">             
+              <img *ngFor="let photo of photos" src="assets/img/houseUploads/{{photo.fileName}}" class="img-thumbnail" alt="">       
+          
+            </div>
+            
+          </mat-card-content>
+        
+        </mat-card>
+      </form>
+      </div>
+    </div>
+  </div>
   </section>

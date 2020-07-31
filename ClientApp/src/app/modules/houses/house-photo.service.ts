@@ -4,15 +4,14 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class PhotoService {
+export class HousePhotoService {
 
   constructor(private http: HttpClient) { }
 
-  upload(vehicleId,photo){
+  upload(houseId,photo){
     var formData = new FormData();
     formData.append('file', photo);
-    return this.http.post(`/api/vehicles/${vehicleId}/photos`, formData)
+    return this.http.post(`/api/houses/${houseId}/photos`, formData)
     .pipe(res => res);
   }
-
 }
