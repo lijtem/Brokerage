@@ -86,6 +86,12 @@
                   <p>Add vehicle</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a [routerLink]="['/vehicle/makes']" class="nav-link" [routerLinkActive]="['active']">
+                  <!-- <i class="fas fa-edit nav-icon"></i> -->
+                  <p>Makes & Models</p>
+                </a>
+              </li>
               <!-- <li class="nav-item">
                 <a [routerLink]="['/vehicle/model']" class="nav-link">
                   <i class="fas fa-edit nav-icon"></i>
@@ -129,7 +135,7 @@
           <li class="nav-header">Admin</li>
           <li class="nav-item">
             <a href="Identity/Account/Register?returnUrl=/authentication/login" class="nav-link">
-              <i class="nav-icon far fa-user-alt"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 Register               
               </p>

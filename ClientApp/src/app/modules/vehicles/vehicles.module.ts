@@ -15,10 +15,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { VehicleMakesComponent } from './vehicle-makes/vehicle-makes.component';
 
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, VehicleMakesComponent],
   imports: [
     CommonModule,
     VehiclesRoutingModule,

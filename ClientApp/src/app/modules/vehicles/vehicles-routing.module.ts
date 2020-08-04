@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
+import { VehicleMakesComponent } from './vehicle-makes/vehicle-makes.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "list",
     component: VehicleListComponent,
+  },
+  {
+    path: "makes",
+    component: VehicleMakesComponent,
   },
   { path: 'edit/:id', component: VehicleEditComponent },
 ];
