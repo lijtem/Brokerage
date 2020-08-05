@@ -10,29 +10,28 @@ using System.Threading.Tasks;
 
 namespace Brokerage.Data
 {
-    public class MakeRepository : IMakeRepository
+    public class ModelRepository : IModelRepository
     {
         private readonly ApplicationDbContext context;
 
-        public MakeRepository(ApplicationDbContext context)
+        public ModelRepository(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        public void Remove(Make make)
+        public void Remove(Model model)
         {
-            context.Makes.Remove(make);
+            context.Models.Remove(model);
         }
 
-        public void Add(Make make)
+        public void Add(Model model)
         {
-            context.Makes.Add(make);
+            context.Models.Add(model);
         }
 
-        public async Task<Make> GetMake(int id)
+        public async Task<Model> GetModel(int id)
         {
-            return await context.Makes.SingleOrDefaultAsync(m => m.Id == id);
-            
+            return await context.Models.SingleOrDefaultAsync(m => m.Id == id);
         }
     }
 }

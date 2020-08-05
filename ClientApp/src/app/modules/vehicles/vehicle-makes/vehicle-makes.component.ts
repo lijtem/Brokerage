@@ -131,8 +131,78 @@ export class VehicleMakesComponent implements OnInit {
   deleteMake(element){
     this.openDialog(element,'Delete');
   }
-  newModel(){
-    console.log(this._make);
+  openModel(_model:any, opt:string){    
+    const _data = {
+      'makeId': this._make.id,
+      'makeName': this._make.name,
+      'model': _model,
+      'operation': opt
+    }
+    const dialogRef = this.dialog.open(ModelDialog, {
+      width: '400px',
+      data: _data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != "") {
+        switch (result.operation) {
+          case 'New': {
+            this.vehicleService.createModel(result).subscribe(dt =>{
+              if(dt > 0){
+                this.getMakes();
+                this.toastyService.success({
+                  title: 'Success',
+                  msg: 'The model was sucessfully added.',
+                  theme: 'bootstrap',
+                  showClose: true,
+                  timeout: 5000
+                });
+               
+              }
+            });
+            break;
+          }
+          case 'Update': {
+            this.vehicleService.editModel(result).subscribe(dt =>{
+              if(dt){
+                this.getMakes();
+                this.toastyService.success({
+                  title: 'Success',
+                  msg: 'The model was sucessfully updated.',
+                  theme: 'bootstrap',
+                  showClose: true,
+                  timeout: 5000
+                });
+               
+              }
+            });
+            break;
+          }
+          case 'Delete': {
+            this.vehicleService.deleteModel(result).subscribe(dt =>{
+              if(dt){
+                this.getMakes();
+                this.toastyService.success({
+                  title: 'Success',
+                  msg: 'The model was sucessfully deleted.',
+                  theme: 'bootstrap',
+                  showClose: true,
+                  timeout: 5000
+                });
+               
+              }
+            }); 
+            break;
+          }
+
+        }
+      }
+    });
+  }
+  editModel(element){
+    this.openModel(element,'Update')
+  }
+  deleteModel(element){
+    this.openModel(element,'Delete')
   }
 
 }
@@ -183,6 +253,66 @@ export class MakeDialog implements OnInit {
     this.opr.operation = 'Delete';
     this.opr.id = this.makeForm.controls.id.value;
     this.opr.name = this.makeForm.controls.name.value;
+    this.dialogRef.close(this.opr);
+  }
+
+}
+
+
+@Component({
+  selector: 'model-dialog',
+  templateUrl: 'model-dialog.html',
+})
+export class ModelDialog implements OnInit {
+  modelForm = this.formBuilder.group({
+    name: [null, [Validators.required]],
+    id: [null],
+    makeId:[null]
+  });
+  opr = {
+    "operation": '',
+    "id": 0,
+    "name": '',
+    "makeId":'',
+  }
+  constructor(
+    public dialogRef: MatDialogRef<ModelDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder) {
+
+  }
+  ngOnInit(): void {
+    if(this.data != null && JSON.stringify(this.data) != '{}' && this.data.operation != 'New'){
+      this.modelForm.controls.name.patchValue(this.data.model.name);
+      this.modelForm.controls.id.patchValue(this.data.model.id);
+      this.modelForm.controls.makeId.patchValue(this.data.makeId);
+    }else{
+      this.modelForm.controls.makeId.patchValue(this.data.makeId);
+    }
+
+  }
+  onNoClick(): void {
+    this.dialogRef.close('');
+  }
+  onSave() {
+    this.opr.operation = 'New';
+    this.opr.id = 0;
+    this.opr.name = this.modelForm.controls.name.value;
+    this.opr.makeId = this.modelForm.controls.makeId.value;
+    this.dialogRef.close(this.opr);
+  }
+  onUpdate() {
+    this.opr.operation = 'Update';
+    this.opr.id = this.modelForm.controls.id.value;
+    this.opr.name = this.modelForm.controls.name.value;
+    this.opr.makeId = this.modelForm.controls.makeId.value;
+    this.dialogRef.close(this.opr);
+  }
+  onDelete() {
+    this.opr.operation = 'Delete';
+    this.opr.id = this.modelForm.controls.id.value;
+    this.opr.name = this.modelForm.controls.name.value;
+    this.opr.makeId = this.modelForm.controls.makeId.value;
     this.dialogRef.close(this.opr);
   }
 

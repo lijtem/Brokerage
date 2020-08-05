@@ -93,7 +93,28 @@ export class VehicleService {
   }
 
   deleteMake(make: any){
-    return this.http.delete('/api/makes/' + make.id,)
+    return this.http.delete('/api/makes/' + make.id)
+      .pipe(res => res);
+  }
+
+  createModel(model: any){
+    const _model = {
+      'name': model.name,
+      'makeId': model.makeId
+    }
+    return this.http.post('/api/models/', _model)
+      .pipe(res => res);
+  }
+  editModel(model: any){
+    const _model = {
+      'name': model.name,
+      'makeId': model.makeId
+    }
+    return this.http.put('/api/models/'+ model.id, _model)
+      .pipe(res => res);
+  }
+  deleteModel(model: any){
+    return this.http.delete('/api/models/'+ model.id)
       .pipe(res => res);
   }
   
