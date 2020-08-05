@@ -15,11 +15,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { VehicleMakesComponent } from './vehicle-makes/vehicle-makes.component';
-
+import { VehicleMakesComponent, MakeDialog } from './vehicle-makes/vehicle-makes.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, VehicleMakesComponent],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, VehicleMakesComponent, MakeDialog],
   imports: [
     CommonModule,
     VehiclesRoutingModule,
@@ -34,7 +34,9 @@ import { VehicleMakesComponent } from './vehicle-makes/vehicle-makes.component';
     MatPaginatorModule,
     MatSortModule,
     MatTabsModule,
+    MatDialogModule,
     SharedModule
-  ]
+  ],
+  entryComponents: [MakeDialog]
 })
 export class VehiclesModule { }

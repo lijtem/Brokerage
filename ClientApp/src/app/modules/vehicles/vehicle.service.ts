@@ -74,4 +74,27 @@ export class VehicleService {
     return this.http.delete('/api/vehicles/' + id)
       .pipe(res => res);
   }
+
+  
+  createMake(make: any){
+    const _make = {
+      'name': make.name
+    }
+    return this.http.post('/api/makes/', _make)
+      .pipe(res => res);
+  }
+  editMake(make: any){
+    const _make = {
+      'name': make.name,
+      'id': make.id
+    }
+    return this.http.put('/api/makes/' + _make.id, _make)
+      .pipe(res => res);
+  }
+
+  deleteMake(make: any){
+    return this.http.delete('/api/makes/' + make.id,)
+      .pipe(res => res);
+  }
+  
 }
