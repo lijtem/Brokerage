@@ -146,6 +146,13 @@
                   <input matInput placeholder="Email" id="email" name="email" [(ngModel)]="vehicle.contact.email">
                 </mat-form-field>
               </div>
+             
+              <div class="col-3">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Code</mat-label>
+                  <input matInput placeholder="Code" id="code" name="code" [(ngModel)]="vehicle.code">
+                </mat-form-field>
+              </div>
               <div class="col">
                 <label for="IsOwner">
                   <input type="checkbox" name="" id="IsOwner" (change)="onOwnerToggle($event)" [checked]="vehicle.IsOwner">
@@ -153,9 +160,11 @@
                 </label>
               </div>
             </div>
-            
+           
           </mat-card-content>
           <mat-card-actions>
+            <button mat-raised-button  (click)="cancle()" style="float: right;margin-top: 24px;margin-right: 24px;">Cancle</button>
+
             <button mat-raised-button color="primary" type="submit" style="float: right;margin-top: 24px;margin-right: 24px;">Submit</button>
           </mat-card-actions>
         </mat-card>

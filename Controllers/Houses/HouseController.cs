@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Brokerage.Controllers.Houses
 {
-    [Authorize]
+   // [Authorize]
+    //[ApiController]
     [Route("/api/houses")]
     public class HouseController : ControllerBase
     {

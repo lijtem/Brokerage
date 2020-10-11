@@ -1,0 +1,105 @@
+<div class="content-header pb-0">
+    <div class="container-fluid px-4">
+      <div class="row mb-3">
+        <div class="col-sm-6 p-0">
+          <h4 class="m-0 text-dark">Manage Locations</h4>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Locations</a></li>
+            <li class="breadcrumb-item active">list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid px-4">
+      <div class="row">
+  
+        <div class="col-md-6" style="min-height:calc(90vh - 207px)">
+          <div class="mat-elevation-z8">
+            <table mat-table class="full-width-table" [dataSource]="dataSource" matSort> 
+  
+  
+              <!-- Car Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id }} </td>
+              </ng-container>
+  
+              <!-- Year Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>City name</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+  
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> 
+                  <button mat-raised-button color="primary" (click)="openDialog({},'New')" style="float: right;margin-right: 24px;">Add City</button>
+  
+                </th>
+                <td mat-cell *matCellDef="let element" class="action-link">
+                  <a (click)="editCity(element)">Edit</a> |
+                  <a (click)="deleteCity(element)">Delete</a>
+                </td>
+              </ng-container>
+  
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{gray: even}"
+                (click)="getDetail(row)"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+  
+          </div>
+        </div>
+        <div class="col-md-6" style="min-height:calc(90vh - 207px)">
+         
+          <div class="mat-elevation-z8" *ngIf="locations">
+            <table mat-table class="full-width-table" [dataSource]="dsLocation" matSort>
+  
+  
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id }} </td>
+              </ng-container>
+  
+              <!-- Year Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Locations in {{ selectedCity.name }}</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+  
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> 
+                  <button mat-raised-button color="primary" (click)="openLocation({},'New')" style="float: right;margin-right: 24px;">New Model</button>
+  
+                </th>
+                <td mat-cell *matCellDef="let element" class="action-link">
+                  <a (click)="editLocation(element)">Edit</a> |
+                  <a (click)="deleteLocation(element)">Delete</a>
+                </td>
+              </ng-container>
+  
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{gray: even}"
+                ></tr>
+            </table>
+            <mat-paginator #modulePage [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            <!-- <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator> -->
+          </div>
+        </div>
+  
+  
+      </div>
+      <div class="row align-items-end">
+        <div class="col-md-12 align-self-end">
+          <!-- <pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination> -->
+        </div>
+      </div>
+    </div>
+  </section>

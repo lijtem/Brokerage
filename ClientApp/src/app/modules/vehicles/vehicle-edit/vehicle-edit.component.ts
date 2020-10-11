@@ -82,6 +82,7 @@ export class VehicleEditComponent implements OnInit {
     this.vehicle.engineSize = v.engineSize;
     this.vehicle.engineType = v.engineType;
     this.vehicle.transmission = v.transmission;
+    this.vehicle.code = v.code;
     this.photos= v.photos;
   }
 
@@ -138,6 +139,10 @@ export class VehicleEditComponent implements OnInit {
         this.photos.push(dt);
       }
     )
+  }
+
+  cancle(){
+    this.router.navigate(['/vehicle']);
   }
 
 }

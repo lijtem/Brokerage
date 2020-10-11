@@ -144,5 +144,9 @@ export class VehicleFormComponent implements OnInit{
         });
       }
 
+      cancle(){
+        this.router.navigate(['/vehicle']);
+      }
+    
      
 }

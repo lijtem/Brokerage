@@ -117,5 +117,14 @@ export class VehicleService {
     return this.http.delete('/api/models/'+ model.id)
       .pipe(res => res);
   }
+
+  addRemark(remark: any){
+    // const _model = {
+    //   'name': model.name,
+    //   'makeId': model.makeId
+    // }
+    return this.http.post('/api/remarks', remark)
+      .pipe(res => res);
+  }
   
 }

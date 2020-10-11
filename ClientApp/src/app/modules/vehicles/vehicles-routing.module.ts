@@ -4,6 +4,7 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { VehicleMakesComponent } from './vehicle-makes/vehicle-makes.component';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     component: VehicleMakesComponent,
   },
   { path: 'edit/:id', component: VehicleEditComponent },
+  { path: 'detail/:id', component: VehicleDetailComponent},
 ];
 
 @NgModule({

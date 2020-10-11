@@ -13,6 +13,7 @@ namespace Brokerage.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<Remark> Remarks { get; set; }
         public DbSet<HousePhoto> HousePhotos { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<City> Cities { get; set; }

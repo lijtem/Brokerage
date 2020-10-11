@@ -114,4 +114,8 @@ export class VehicleListComponent implements  OnInit {
   edit(element){
     this.router.navigate(['/vehicle/edit/'+element]);
   }
+  getDetail(row){
+    this.router.navigate(['/vehicle/detail/'+row]);
+   
+  }
 }

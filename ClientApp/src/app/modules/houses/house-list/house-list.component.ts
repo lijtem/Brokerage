@@ -17,7 +17,7 @@ export class HouseListComponent implements OnInit {
   locations: any[];
   queryResult: any = {};
   dataSource: MatTableDataSource<any>;
-  query: any = {
+  query: any= {
     pageSize: this.PAGE_SIZE
   };
 
@@ -65,33 +65,25 @@ export class HouseListComponent implements OnInit {
 
   resetFilter(){
     this.houseForm.reset();
-    this.query = {
+    this.query =[ {
       page: 1,
       pageSize: this.PAGE_SIZE
-    };
+    }];
     this.populateProperty();
   }
   applyFilter(){
-    
     if(this.houseForm.controls.city.value != null){
-      this.query = {
-        CityId: this.houseForm.controls.city.value,
-      }
+      this.query.CityId = this.houseForm.controls.city.value
+      
     }
     if(this.houseForm.controls.location.value != null){
-      this.query = {
-        LocationId: this.houseForm.controls.location.value,
-      }
+      this.query.LocationId =this.houseForm.controls.location.value
     }
     if(this.houseForm.controls.isOwner.value != null){
-      this.query = {
-        IsOwner: this.houseForm.controls.isOwner.value,
-      }
+      this.query.IsOwner = this.houseForm.controls.isOwner.value
     }
     if(this.houseForm.controls.code.value != null){
-      this.query = {
-        Code: this.houseForm.controls.code.value,
-      }
+      this.query.Code = this.houseForm.controls.code.value
     }
     this.query.page = 1;
     this.populateProperty();

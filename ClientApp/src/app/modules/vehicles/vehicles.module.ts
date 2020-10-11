@@ -17,9 +17,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VehicleMakesComponent, MakeDialog, ModelDialog } from './vehicle-makes/vehicle-makes.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { RemarkDialog, VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 @NgModule({
-  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, VehicleMakesComponent, MakeDialog, ModelDialog],
+  declarations: [VehicleFormComponent, VehicleListComponent, VehicleEditComponent, VehicleMakesComponent, MakeDialog, ModelDialog, VehicleDetailComponent, RemarkDialog],
   imports: [
     CommonModule,
     VehiclesRoutingModule,
@@ -37,6 +38,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule,
     SharedModule
   ],
-  entryComponents: [MakeDialog, ModelDialog]
+  entryComponents: [MakeDialog, ModelDialog,RemarkDialog]
 })
 export class VehiclesModule { }

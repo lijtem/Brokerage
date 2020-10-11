@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Add remark</h1>
+<div mat-dialog-content> 
+  <form [formGroup]="remarkForm" *ngIf="data.operation != 'Delete'">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput  formControlName="name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input matInput  formControlName="phone" >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Remarks</mat-label>
+    <textarea  matInput  formControlName="remarks" ></textarea>
+  </mat-form-field>
+</form>
+</div>
+<div mat-dialog-actions style="justify-content:center">
+  <button  mat-button (click)="onSave()" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

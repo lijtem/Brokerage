@@ -37,10 +37,12 @@ namespace Brokerage.Core.Models
         public string YearMade { get; set; }
         public ICollection<VehicleFeature> Features { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Remark> Remarks { get; set; }
         public Vehicle()
         {
             Features = new Collection<VehicleFeature>();
             Photos = new Collection<Photo>();
+            Remarks = new Collection<Remark>();
         }
     }
 }

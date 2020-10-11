@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: "vehicle",
     component: FullComponent,
-    canActivate: [AuthorizeGuard],
+    //canActivate: [AuthorizeGuard],
     // canActivate: [NgxPermissionsGuard],
     loadChildren: () =>
       import("./modules/Vehicles/vehicles.module").then(
@@ -23,11 +23,21 @@ export const routes: Routes = [
   {
     path: "house",
     component: FullComponent,    
-    canActivate: [AuthorizeGuard],
+    //canActivate: [AuthorizeGuard],
     // canActivate: [NgxPermissionsGuard],
     loadChildren: () =>
       import("./modules/houses/houses.module").then(
         (m) => m.HousesModule
+      ),
+  },
+  {
+    path: "admin",
+    component: FullComponent,    
+    //canActivate: [AuthorizeGuard],
+    // canActivate: [NgxPermissionsGuard],
+    loadChildren: () =>
+      import("./modules/admin/admin.module").then(
+        (m) => m.AdminModule
       ),
   },{
     path: "fetch",

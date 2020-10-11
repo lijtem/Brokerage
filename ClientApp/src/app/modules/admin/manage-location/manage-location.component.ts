@@ -1,69 +1,76 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { VehicleService } from '../vehicle.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { JsonpInterceptor } from '@angular/common/http';
+import { AdminServices } from '../admin-services';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastyService } from 'ng2-toasty';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-vehicle-makes',
-  templateUrl: './vehicle-makes.component.html',
-  styleUrls: ['./vehicle-makes.component.css']
+  selector: 'app-manage-location',
+  templateUrl: './manage-location.component.html',
+  styleUrls: ['./manage-location.component.css']
 })
-export class VehicleMakesComponent implements OnInit {
+export class ManageLocationComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
-  dataSourceModel = new MatTableDataSource<any>();
+  dsLocation = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('modulePage', { static: true }) modulePage: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   displayedColumns: string[] = ['id', 'name', 'action'];
   displayedModelColumns: string[] = ['id', 'name', 'action'];
-
   private readonly PAGE_SIZE = 8;
 
-  makes: any;
-  models: any[];
-  selectedMake: any = {};
-  _make = {
+  cities: any;
+  locations: any[];
+  selectedCity: any = {};
+  _city = {
     'id': 0,
     'name': ''    
   };
-  constructor(private vehicleService: VehicleService,
+
+  constructor(private adminService: AdminServices,
     public dialog: MatDialog,    
     private toastyService: ToastyService) { }
 
   ngOnInit() {
-    this.getMakes();
+    this.getCities();
     this.dataSource.paginator = this.paginator;
-    this.dataSourceModel.paginator = this.modulePage;
+    this.dsLocation.paginator = this.modulePage;
   }
 
-  private getMakes() {
-    this.vehicleService.getMakes()
-      .subscribe(makes => {
-        this.makes = makes;
-        this.dataSource.data = makes;
+  private getCities() {
+    this.adminService.getCities()
+      .subscribe(dt => {
+        this.cities = dt;
+        this.dataSource.data = dt;
       });
   }
 
   getDetail(index) {
-    this._make.id = index.id;
-    this._make.name = index.name;
-    this.selectedMake = this.makes.find(m => m.id == index.id);
-    this.models = this.selectedMake ? this.selectedMake.models : [];
-    this.dataSourceModel.data = this.models;
+    this._city.id = index.id;
+    this._city.name = index.name;
+    this.selectedCity = this.cities.find(m => m.id == index.id);
+    this.locations = this.selectedCity ? this.selectedCity.locations : [];
+    this.dsLocation.data = this.locations;
   }
 
-  openDialog(make:any, opt?:string): void {
+  editCity(element) {
+    this.openDialog(element, 'Update');
+  }
+  deleteCity(element){
+    this.openDialog(element,'Delete');
+  }
+
+  openDialog(city:any, opt?:string): void {
+  
     const _data = {
-      'id': make.id,
-      'name': make.name,
+      'id': city.id,
+      'name': city.name,
       'operation': opt
     }
-    const dialogRef = this.dialog.open(MakeDialog, {
+    const dialogRef = this.dialog.open(CityDialog, {
       width: '400px',
       data: _data
     });
@@ -72,9 +79,9 @@ export class VehicleMakesComponent implements OnInit {
       if (result != "") {
         switch (result.operation) {
           case 'New': {
-            this.vehicleService.createMake(result).subscribe(dt =>{
+            this.adminService.createCity(result).subscribe(dt =>{
               if(dt > 0){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
                   msg: 'The make was sucessfully added.',
@@ -88,9 +95,9 @@ export class VehicleMakesComponent implements OnInit {
             break;
           }
           case 'Update': {
-            this.vehicleService.editMake(result).subscribe(dt =>{
+            this.adminService.editCity(result).subscribe(dt =>{
               if(dt){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
                   msg: 'The make was sucessfully updated.',
@@ -104,9 +111,9 @@ export class VehicleMakesComponent implements OnInit {
             break;
           }
           case 'Delete': {
-            this.vehicleService.deleteMake(result).subscribe(dt =>{
+            this.adminService.deleteCity(result).subscribe(dt =>{
               if(dt){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
                   msg: 'The make was sucessfully deleted.',
@@ -125,21 +132,15 @@ export class VehicleMakesComponent implements OnInit {
       //this.animal = result;
     });
   }
-  
-  editMake(element) {
-    this.openDialog(element, 'Update');
-  }
-  deleteMake(element){
-    this.openDialog(element,'Delete');
-  }
-  openModel(_model:any, opt:string){    
+
+  openLocation(_model:any, opt:string){    
     const _data = {
-      'makeId': this._make.id,
-      'makeName': this._make.name,
-      'model': _model,
+      'cityId': this._city.id,
+      'cityName': this._city.name,
+      'location': _model,
       'operation': opt
     }
-    const dialogRef = this.dialog.open(ModelDialog, {
+    const dialogRef = this.dialog.open(LocationsDialog, {
       width: '400px',
       data: _data
     });
@@ -147,12 +148,12 @@ export class VehicleMakesComponent implements OnInit {
       if (result != "") {
         switch (result.operation) {
           case 'New': {
-            this.vehicleService.createModel(result).subscribe(dt =>{
+            this.adminService.createLocation(result).subscribe(dt =>{
               if(dt > 0){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
-                  msg: 'The model was sucessfully added.',
+                  msg: 'The location was sucessfully added.',
                   theme: 'bootstrap',
                   showClose: true,
                   timeout: 5000
@@ -163,12 +164,12 @@ export class VehicleMakesComponent implements OnInit {
             break;
           }
           case 'Update': {
-            this.vehicleService.editModel(result).subscribe(dt =>{
+            this.adminService.editLocation(result).subscribe(dt =>{
               if(dt){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
-                  msg: 'The model was sucessfully updated.',
+                  msg: 'The location was sucessfully updated.',
                   theme: 'bootstrap',
                   showClose: true,
                   timeout: 5000
@@ -179,12 +180,12 @@ export class VehicleMakesComponent implements OnInit {
             break;
           }
           case 'Delete': {
-            this.vehicleService.deleteModel(result).subscribe(dt =>{
+            this.adminService.deleteLocation(result).subscribe(dt =>{
               if(dt){
-                this.getMakes();
+                this.getCities();
                 this.toastyService.success({
                   title: 'Success',
-                  msg: 'The model was sucessfully deleted.',
+                  msg: 'The location was sucessfully deleted.',
                   theme: 'bootstrap',
                   showClose: true,
                   timeout: 5000
@@ -199,21 +200,23 @@ export class VehicleMakesComponent implements OnInit {
       }
     });
   }
-  editModel(element){
-    this.openModel(element,'Update')
+  editLocation(element){
+    this.openLocation(element,'Update')
   }
-  deleteModel(element){
-    this.openModel(element,'Delete')
+  deleteLocation(element){
+    this.openLocation(element,'Delete')
   }
+  
+  
 
 }
 
 @Component({
-  selector: 'make-dialog',
-  templateUrl: 'make-dialog.html',
+  selector: 'city-dialog',
+  templateUrl: 'city-dialog.html',
 })
-export class MakeDialog implements OnInit {
-  makeForm = this.formBuilder.group({
+export class CityDialog implements OnInit {
+  cityForm = this.formBuilder.group({
     name: [null, [Validators.required]],
     id: [null]
   });
@@ -223,15 +226,15 @@ export class MakeDialog implements OnInit {
     "name": '',
   }
   constructor(
-    public dialogRef: MatDialogRef<MakeDialog>,
+    public dialogRef: MatDialogRef<CityDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder) {
 
   }
   ngOnInit(): void {
     if (this.data != null || JSON.stringify(this.data) != '{}') {
-      this.makeForm.controls.name.patchValue(this.data.name);
-      this.makeForm.controls.id.patchValue(this.data.id);
+      this.cityForm.controls.name.patchValue(this.data.name);
+      this.cityForm.controls.id.patchValue(this.data.id);
     }
 
   }
@@ -241,19 +244,19 @@ export class MakeDialog implements OnInit {
   onSave() {
     this.opr.operation = 'New';
     this.opr.id = 0;
-    this.opr.name = this.makeForm.controls.name.value;
+    this.opr.name = this.cityForm.controls.name.value;
     this.dialogRef.close(this.opr);
   }
   onUpdate() {
     this.opr.operation = 'Update';
-    this.opr.id = this.makeForm.controls.id.value;
-    this.opr.name = this.makeForm.controls.name.value;
+    this.opr.id = this.cityForm.controls.id.value;
+    this.opr.name = this.cityForm.controls.name.value;
     this.dialogRef.close(this.opr);
   }
   onDelete() {
     this.opr.operation = 'Delete';
-    this.opr.id = this.makeForm.controls.id.value;
-    this.opr.name = this.makeForm.controls.name.value;
+    this.opr.id = this.cityForm.controls.id.value;
+    this.opr.name = this.cityForm.controls.name.value;
     this.dialogRef.close(this.opr);
   }
 
@@ -261,34 +264,34 @@ export class MakeDialog implements OnInit {
 
 
 @Component({
-  selector: 'model-dialog',
-  templateUrl: 'model-dialog.html',
+  selector: 'location-dialog',
+  templateUrl: 'location-dialog.html',
 })
-export class ModelDialog implements OnInit {
-  modelForm = this.formBuilder.group({
+export class LocationsDialog implements OnInit {
+  locationForm = this.formBuilder.group({
     name: [null, [Validators.required]],
     id: [null],
-    makeId:[null]
+    cityId:[null]
   });
   opr = {
     "operation": '',
     "id": 0,
     "name": '',
-    "makeId":'',
+    "cityId":'',
   }
   constructor(
-    public dialogRef: MatDialogRef<ModelDialog>,
+    public dialogRef: MatDialogRef<LocationsDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder) {
 
   }
   ngOnInit(): void {
     if(this.data != null && JSON.stringify(this.data) != '{}' && this.data.operation != 'New'){
-      this.modelForm.controls.name.patchValue(this.data.model.name);
-      this.modelForm.controls.id.patchValue(this.data.model.id);
-      this.modelForm.controls.makeId.patchValue(this.data.makeId);
+      this.locationForm.controls.name.patchValue(this.data.location.name);
+      this.locationForm.controls.id.patchValue(this.data.location.id);
+      this.locationForm.controls.cityId.patchValue(this.data.cityId);
     }else{
-      this.modelForm.controls.makeId.patchValue(this.data.makeId);
+      this.locationForm.controls.cityId.patchValue(this.data.cityId);
     }
 
   }
@@ -298,22 +301,22 @@ export class ModelDialog implements OnInit {
   onSave() {
     this.opr.operation = 'New';
     this.opr.id = 0;
-    this.opr.name = this.modelForm.controls.name.value;
-    this.opr.makeId = this.modelForm.controls.makeId.value;
+    this.opr.name = this.locationForm.controls.name.value;
+    this.opr.cityId = this.locationForm.controls.cityId.value;
     this.dialogRef.close(this.opr);
   }
   onUpdate() {
     this.opr.operation = 'Update';
-    this.opr.id = this.modelForm.controls.id.value;
-    this.opr.name = this.modelForm.controls.name.value;
-    this.opr.makeId = this.modelForm.controls.makeId.value;
+    this.opr.id = this.locationForm.controls.id.value;
+    this.opr.name = this.locationForm.controls.name.value;
+    this.opr.cityId = this.locationForm.controls.cityId.value;
     this.dialogRef.close(this.opr);
   }
   onDelete() {
     this.opr.operation = 'Delete';
-    this.opr.id = this.modelForm.controls.id.value;
-    this.opr.name = this.modelForm.controls.name.value;
-    this.opr.makeId = this.modelForm.controls.makeId.value;
+    this.opr.id = this.locationForm.controls.id.value;
+    this.opr.name = this.locationForm.controls.name.value;
+    this.opr.cityId = this.locationForm.controls.cityId.value;
     this.dialogRef.close(this.opr);
   }
 

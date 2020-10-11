@@ -4,14 +4,16 @@ using Brokerage.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Brokerage.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201011211946_Remarks")]
+    partial class Remarks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,8 +254,6 @@ namespace Brokerage.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("VehicleId");
 
                     b.ToTable("Remarks");
                 });
@@ -661,15 +661,6 @@ namespace Brokerage.Data.Migrations
                 {
                     b.HasOne("Brokerage.Core.Models.Vehicle", null)
                         .WithMany("Photos")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Brokerage.Core.Models.Remark", b =>
-                {
-                    b.HasOne("Brokerage.Core.Models.Vehicle", null)
-                        .WithMany("Remarks")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -28,6 +28,9 @@ namespace Brokerage
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
+            services.AddScoped<IRemarkRepository, RemarkRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IMakeRepository, MakeRepository>();
             services.AddScoped<IHouseRepository, HouseRepository>();
