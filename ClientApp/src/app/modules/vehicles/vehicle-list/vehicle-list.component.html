@@ -37,9 +37,9 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Is Owner</mat-label>
+            <mat-label>Owner?</mat-label>
             <mat-select id="isOwner"  [(ngModel)]="query.isOwner" name="isOwner"  #engineType="ngModel">
             
               <mat-option value="true">Yes</mat-option>
@@ -47,13 +47,25 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-1">
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Code</mat-label>
             <input matInput placeholder="Code" id="code" name="code" [(ngModel)]="query.code">
           </mat-form-field>
         </div>
-        <div class="col-md-4 text-right align-self-center">          
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" id="Name" name="name" [(ngModel)]="query.Name">
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Phone</mat-label>
+            <input matInput placeholder="Phone" type="text" id="phone" name="phone" [(ngModel)]="query.phone">
+          </mat-form-field>
+        </div>
+        <div class="col text-right align-self-center">          
            <button mat-raised-button color="primary" (click)="applyFilter()" class="mr-3">Search</button>      
            <button mat-raised-button  (click)="resetFilter()"  class="mr-3">Clear</button>     
         </div>

@@ -26,10 +26,12 @@ namespace Brokerage.Controllers.Resources
         public string YearMade { get; set; }
         public ICollection<KeyValuePairResource> Features { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Remark> Remarks { get; set; }
         public VehicleResource()
         {
             Features = new Collection<KeyValuePairResource>();
             Photos = new Collection<Photo>();
+            Remarks = new Collection<Remark>();
         }
     }
 }

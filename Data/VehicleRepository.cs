@@ -41,7 +41,8 @@ namespace Brokerage.Data
                 .ThenInclude(m => m.Make)
               .Include(v => v.Features)
                 .ThenInclude(vf => vf.Feature)
-                 .Include(v => v.Photos)
+                 .Include(v => v.Photos)                 
+                 .Include(v=> v.Remarks)
               .AsQueryable();
 
             if (queryObj.MakeId.HasValue)
@@ -55,6 +56,10 @@ namespace Brokerage.Data
 
             if (queryObj.Code != null)
                 query = query.Where(v => v.Code.ToLower() == queryObj.Code.ToLower());
+            if (queryObj.Name != null)
+                query = query.Where(v => v.Remarks.Any(x=>x.Name.ToLower() == queryObj.Name.ToLower()));
+            if (queryObj.Phone != null)
+                query = query.Where(v => v.Remarks.Any(x => x.Phone.ToLower() == queryObj.Phone.ToLower()));
 
 
             var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
@@ -62,7 +67,8 @@ namespace Brokerage.Data
                 ["make"] = v => v.Model.Make.Name,
                 ["model"] = v => v.Model.Name,
                 ["contactName"] = v => v.ContactName,
-                ["code"] = v => v.Code
+                ["code"] = v => v.Code,
+                //["name"] = v => v.Remark.Name,
             };
 
             query = query.ApplyOrdering(queryObj, columnsMap);
