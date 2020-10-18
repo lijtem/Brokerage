@@ -1,6 +1,8 @@
 ﻿using Brokerage.Core;
 using Brokerage.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Brokerage.Data
@@ -25,6 +27,10 @@ namespace Brokerage.Data
         public void Remove(Remark remark)
         {
             context.Remarks.Remove(remark);
+        }
+        public async Task<IEnumerable<Remark>> GetRemarksByVehicle(int id)
+        {
+            return await context.Remarks.Where(m => m.VehicleId == id).ToListAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../vehicle.service';
 import { PhotoService } from '../photo.service';
@@ -6,7 +6,7 @@ import { SaveVehicleModel, VehicleModel } from '../models/vehicle-model';
 import { Observable } from 'rxjs';
 import * as _ from 'underscore';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MatPaginator, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
@@ -18,6 +18,13 @@ export class VehicleDetailComponent implements OnInit {
   
   vehicle: any;
   vehicleId: number;
+  remarks: any[] = [] as any[];
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  displayedColumns: string[] = [ 'name', 'phone',  'remark'];
+ 
+
   
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -28,10 +35,16 @@ export class VehicleDetailComponent implements OnInit {
       route.params.subscribe(p => {
         this.vehicleId = +p['id'];
       });
+      this.dataSource = new MatTableDataSource(this.remarks);
+
      }
 
   ngOnInit() {
    
+    this.getVehicleDetail();
+  } 
+
+  getVehicleDetail(){
     if (this.vehicleId){
       this.vehicleService.getVehicle(this.vehicleId).subscribe(
         dt => {
@@ -41,8 +54,16 @@ export class VehicleDetailComponent implements OnInit {
             this.router.navigate(['/vehicle']);
         }
       )
+      this.vehicleService.getRemarks(this.vehicleId).subscribe(res =>{
+          this.remarks = res;
+          this.dataSource.data = res;
+      },err => {
+        if (err.status == 404)
+            this.router.navigate(['/vehicle']);
+        }
+      );
     }
-  } 
+  }
 
   openDialog(){
     const dialogRef = this.dialog.open(RemarkDialog, {
@@ -53,6 +74,7 @@ export class VehicleDetailComponent implements OnInit {
       if (result != "") {
         this.vehicleService.addRemark(result).subscribe(dt => {
           if(dt > 0){
+            this.getVehicleDetail();
             this.toastyService.success({
               title: 'success',
               msg: 'remark sucessfully added.',

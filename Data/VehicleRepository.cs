@@ -72,6 +72,7 @@ namespace Brokerage.Data
             };
 
             query = query.ApplyOrdering(queryObj, columnsMap);
+           // query = query.Where(v => v.Remarks == null);
 
             result.TotalItems = await query.CountAsync();
 

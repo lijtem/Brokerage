@@ -42,7 +42,7 @@ namespace Brokerage.Controllers.Vehicles
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRemarks(int id)
         {
-            var remarks = await repository.GetRemarks(id);
+            var remarks = await repository.GetRemarksByVehicle(id);
             if (remarks == null)
                 return NotFound();
             return Ok(remarks);

@@ -9,6 +9,7 @@ namespace Brokerage.Core
     public interface IRemarkRepository
     {
         Task<Remark> GetRemarks(int id);
+        Task<IEnumerable<Remark>> GetRemarksByVehicle(int id);
         void Add(Remark remark);
         void Remove(Remark remark);
     }

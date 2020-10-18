@@ -126,5 +126,9 @@ export class VehicleService {
     return this.http.post('/api/remarks', remark)
       .pipe(res => res);
   }
+
+  getRemarks(id: any){
+    return this.http.get<any[]>('/api/remarks/'+id).pipe(res => res);
+  }
   
 }
