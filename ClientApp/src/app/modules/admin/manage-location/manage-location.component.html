@@ -17,7 +17,7 @@
     <div class="container-fluid px-4">
       <div class="row">
   
-        <div class="col-md-6" style="min-height:calc(90vh - 207px)">
+        <div class="col-md-6" style="height:calc(92vh - 100px); overflow: auto;">
           <div class="mat-elevation-z8">
             <table mat-table class="full-width-table" [dataSource]="dataSource" matSort> 
   
@@ -55,7 +55,7 @@
   
           </div>
         </div>
-        <div class="col-md-6" style="min-height:calc(90vh - 207px)">
+        <div class="col-md-6" style="height:calc(92vh - 100px); overflow: auto;">
          
           <div class="mat-elevation-z8" *ngIf="locations">
             <table mat-table class="full-width-table" [dataSource]="dsLocation" matSort>

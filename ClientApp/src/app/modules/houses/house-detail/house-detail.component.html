@@ -1,0 +1,128 @@
+<div class="content-header pb-0">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h5 class="m-0 text-dark">House detail</h5>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">House</a></li>
+            <li class="breadcrumb-item active">detail</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- Main content -->
+  <section class="content mx-2">
+    <!-- Default box -->
+    <div class="card" style="height: 82vh;">
+      <div class="card-header">
+        <h3 class="card-title">{{house?.title}} - {{house?.category}} <span
+            class="badge badge-pill badge-primary ml-4">{{house?.price}}</span></h3>
+  
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8 pl-3">
+            <div class="row">
+              <!-- <div class="col-12">
+                <button style="float: right;" (click)="openDialog()">Remarks</button>
+                <span class="deatil"><span class="detailTitle">Name: </span><span>
+                    {{ house?.contact?.name }}</span></span>
+                <span class="deatil"><span class="detailTitle">Email:
+                  </span><span>{{ house?.contact?.email }}</span></span>
+                <span class="deatil"><span class="detailTitle">Phone:
+                  </span><span>{{ house?.contact?.phone }}</span></span>
+                <span class="sep"></span>
+              </div> -->
+              <div class="col-3">
+                <span class="detailTitle">Name: </span>
+                <span class="deatil"><span>
+                  {{ house?.contact?.name }}</span></span>
+              </div>
+              <div class="col-3">
+                <span class="detailTitle">Email:
+                </span>
+                <span class="deatil"><span>{{ house?.contact?.email }}</span></span>
+              </div>
+              <div class="col-3">
+                <span class="detailTitle">Phone:
+                </span>
+                <span class="deatil"><span>{{ house?.contact?.phone }}</span></span>
+              <span class="sep"></span>
+              </div>
+              <div class="col-3"> </div>
+  
+              <div class="col-3">
+                <span class="detailTitle">Bed rooms
+                </span>
+                <span class="deatil"><span>{{ house?.bedrooms }}</span></span>
+              <span class="sep"></span>
+              </div>
+              <div class="col-3">
+                <span class="detailTitle">Bathrooms
+                </span>
+                <span class="deatil"><span>{{ house?.bathrooms }}</span></span>
+              <span class="sep"></span>
+              </div>
+              <div class="col-3">
+                <span class="detailTitle">Area
+                </span>
+                <span class="deatil"><span>{{ house?.area }} </span></span>
+              <span class="sep"></span>
+              </div>
+              <div class="col-3">
+                <span class="detailTitle">No of floors
+                </span>
+                <span class="deatil"><span>{{ house?.noFloors }}</span></span>
+              <span class="sep"></span>
+              </div>
+              <div class="col-12">
+                <span class="detailTitle">Description
+                </span>
+                <span class="deatil"><span>{{ house?.description }}</span></span>
+              <span class="sep"></span>
+              </div>
+  
+              
+            
+            </div>
+            <span class="sep"></span>
+            <span class="chip" *ngFor="let f of house?.features"> {{f.name}}</span>
+          </div>
+          <div class="col-4">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner" >
+                <div *ngFor="let photo of house?.photos, let i = index" class="carousel-item " [ngClass]="{'active' : i == 0}">
+                  <img class="d-block w-100" src="assets/img/houseUploads/{{photo.fileName}}" alt="First slide">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+    <!-- Default box -->
+    
+  </section>

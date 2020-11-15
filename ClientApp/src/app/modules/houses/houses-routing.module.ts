@@ -3,8 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { HouseFormComponent } from './house-form/house-form.component';
 import { HouseListComponent } from './house-list/house-list.component';
 import { HouseEditComponent } from './house-edit/house-edit.component';
+import { HouseDetailComponent } from './house-detail/house-detail.component';
 
 const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "list",
+  },
   {
     path: "new",
     component: HouseFormComponent,
@@ -16,7 +21,8 @@ const routes: Routes = [
   {
     path: "edit/:id",
     component: HouseEditComponent,
-  }
+  },
+  { path: 'detail/:id', component: HouseDetailComponent},
 ];
 
 @NgModule({

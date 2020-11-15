@@ -107,4 +107,9 @@ export class HouseListComponent implements OnInit {
     this.populateProperty();
   }
 
+  getDetail(row){
+    this.router.navigate(['/house/detail/'+row]);
+   
+  }
+
 }

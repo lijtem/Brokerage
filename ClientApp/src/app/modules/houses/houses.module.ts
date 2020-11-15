@@ -12,9 +12,10 @@ import { HouseListComponent } from './house-list/house-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { HouseEditComponent } from './house-edit/house-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HouseDetailComponent } from './house-detail/house-detail.component';
 
 @NgModule({
-  declarations: [HouseFormComponent, HouseListComponent, HouseEditComponent, ],
+  declarations: [HouseFormComponent, HouseListComponent, HouseEditComponent, HouseDetailComponent, ],
   imports: [
     CommonModule,
     HousesRoutingModule,

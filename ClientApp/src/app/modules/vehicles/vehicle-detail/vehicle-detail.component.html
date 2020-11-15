@@ -19,7 +19,7 @@
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">{{vehicle?.make?.name}} - {{vehicle?.model?.name}} <span
-          class="badge badge-pill badge-primary">{{vehicle?.price}}</span></h3>
+          class="badge badge-pill badge-primary ml-4">{{vehicle?.price}}</span></h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col-8 pl-3">
           <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-12">
               <button style="float: right;" (click)="openDialog()">Remarks</button>
               <span class="deatil"><span class="detailTitle">Name: </span><span>
                   {{ vehicle?.contact?.name }}</span></span>
@@ -41,20 +41,50 @@
               <span class="deatil"><span class="detailTitle">Phone:
                 </span><span>{{ vehicle?.contact?.phone }}</span></span>
               <span class="sep"></span>
+            </div> -->
+            <div class="col-3">
+              <span class="detailTitle">Name: </span>
+              <span class="deatil"><span>
+                {{ vehicle?.contact?.name }}</span></span>
             </div>
-            <div class="col-4">
-              <span class="deatil"><span class="detailTitle">Year: </span><span>{{ vehicle?.yearMade }}</span></span>
-              <span class="deatil"><span class="detailTitle">Color: </span><span>{{ vehicle?.color }}</span></span>
+            <div class="col-3">
+              <span class="detailTitle">Email:
+              </span>
+              <span class="deatil"><span>{{ vehicle?.contact?.email }}</span></span>
             </div>
-            <div class="col-4">
-              <span class="deatil"><span class="detailTitle">Engine Size:
-                </span><span>{{ vehicle?.engineSize }}</span></span>
-              <span class="deatil"><span class="detailTitle">Engine Type:
-                </span><span>{{ vehicle?.engineType }}</span></span>
+            <div class="col-3">
+              <span class="detailTitle">Phone:
+              </span>
+              <span class="deatil"><span>{{ vehicle?.contact?.phone }}</span></span>
+            <span class="sep"></span>
             </div>
-            <div class="col-4"> <span class="deatil"><span class="detailTitle">Transmission:
-                </span><span>{{ vehicle?.transmission }}</span></span>
+            <div class="col-3"> <button style="float: right;" (click)="openDialog()">Remarks</button></div>
+
+            <div class="col-3">
+              <span class="detailTitle">Year
+              </span>
+              <span class="deatil"><span>{{ vehicle?.yearMade }}</span></span>
+            <span class="sep"></span>
             </div>
+            <div class="col-3">
+              <span class="detailTitle">Engine
+              </span>
+              <span class="deatil"><span>{{ vehicle?.engineSize }} / {{ vehicle?.engineType }}</span></span>
+            <span class="sep"></span>
+            </div>
+            <div class="col-3">
+              <span class="detailTitle">Transmission
+              </span>
+              <span class="deatil"><span>{{ vehicle?.transmission }} </span></span>
+            <span class="sep"></span>
+            </div>
+            <div class="col-3">
+              <span class="detailTitle">Color
+              </span>
+              <span class="deatil"><span>{{ vehicle?.color }}</span></span>
+            <span class="sep"></span>
+            </div>
+
           </div>
           <span class="sep"></span>
           <span class="chip" *ngFor="let f of vehicle?.features"> {{f.name}}</span>
@@ -66,8 +96,8 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner" *ngFor="let photo of vehicle?.photos, let i = index">
-              <div class="carousel-item " [ngClass]="{'active' : i == 0}">
+            <div class="carousel-inner" >
+              <div *ngFor="let photo of vehicle?.photos, let i = index" class="carousel-item " [ngClass]="{'active' : i == 0}">
                 <img class="d-block w-100" src="assets/img/carUploads/{{photo.fileName}}" alt="First slide">
               </div>
             </div>
@@ -96,7 +126,7 @@
           <i class="fas fa-times"></i></button>
       </div>
     </div>
-    <div class="card-body">
+    <div class="card-body remarkBody">
       <div class="row">
         <div class="col-12">
           <div class="mat-elevation-z8">
